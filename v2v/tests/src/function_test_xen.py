@@ -99,7 +99,7 @@ def run(test, params, env):
             fd.write(openssl_cnf)
 
         # export the environment variable
-        os.environ['OPENSSL_CONF'] = '%s/openssl-sha1.cnf' % os.getenv('HOME')
+        os.environ['OPENSSL_CONF'] = os.path.expanduser('~/openssl-sha1.cnf')
 
     def check_grub_file(vmcheck, check):
         """
@@ -228,6 +228,8 @@ def run(test, params, env):
 
         # Setup ssh-agent access to xen hypervisor
         LOG.info('set up ssh-agent access ')
+        LOG.debug(os.environ['OPENSSL_CONF'])
+        LOG.debug('---> debug %s' % os.getenv('OPENSSL_CONF'))
         xen_pubkey, xen_session = utils_v2v.v2v_setup_ssh_key(
             xen_host, xen_host_user, xen_host_passwd, auto_close=False)
         utils_misc.add_identities_into_ssh_agent()
