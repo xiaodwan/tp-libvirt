@@ -694,7 +694,7 @@ class VMChecker(object):
         pci_devs = self.checker.get_vm_pci_list()
         virtio_devs = ["Virtio network device",
                        "Virtio block device",
-                       "Virtio memory balloon"]
+                       "Virtio (memory|1.0) balloon"]
         # Virtio RNG supports from kernel-2.6.26
         # https://wiki.qemu.org/Features/VirtIORNG
         if compare_version(FEATURE_SUPPORT['virtio_rng'], kernel_version):
